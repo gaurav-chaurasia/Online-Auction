@@ -1,0 +1,37 @@
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %>
+    <a href="#" class="close" data-dismiss="alert">&#215;</a>
+  </div>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @auction.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @auction.description %>
+</p>
+
+<p>
+  <strong>Starting bid:</strong>
+  <%= @auction.starting_bid %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @auction.deadline %>
+</p>
+
+<p>
+  <strong>Current price:</strong>
+  <%= @auction.current_price %>
+</p>
+
+<div>
+  <strong>Image: </strong>
+  <%= image_tag(@auction.image, style:"width:50%") if @auction.image.attached? %>
+</div>
+<%= link_to 'Edit', edit_auction_path(@auction) %> |
+<%= link_to 'Back', auctions_path %>

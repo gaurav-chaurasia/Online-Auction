@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%# <a class="navbar-brand" id="logo" href="#">G-SHOP</a> %>
+      <%= link_to 'Online Auction', root_path, class:"navbar-brand", id:"logo" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Auction Dashboard',auctions_path %></li>
+        <li><%= link_to 'User', users_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+            <ul class="dropdown-menu center">
+              <li><a href="#">Books</a></li>
+              <li><a href="#">Electronics</a></li>
+              <li><a href="#">Cycles</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Old papers</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Gyan</a></li>
+            </ul>
+          </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
+            <ul class="dropdown-menu center">
+              <li><%= link_to 'Add new Products', new_auction_path %></li>
+              <li><%= link_to 'View your profile', user_path(current_user) %></li>
+              <li><%= link_to 'Edit your profile', edit_user_registration_path(current_user) %></li>
+            </ul>
+          </li>
+          <li><%= link_to 'Log out', destroy_user_session_path,method: :delete, class:"btn btn-danger", id:"logout-btn" %></li>
+        <% else %>
+          <li><%= link_to 'Log In', new_user_session_path, class:"btn btn-primary", id:"login-btn" %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path, style:"padding: 1.5rem 4rem" %></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

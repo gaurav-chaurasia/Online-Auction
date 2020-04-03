@@ -1,0 +1,40 @@
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %>
+    <a href="#" class="close" data-dismiss="alert">&#215;</a>
+  </div>
+<% end %>
+<h1>Auctions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Starting bid</th>
+      <th>Deadline<br><small>yyyy-mm-dd</small></th>
+      <th>Current price</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @auctions.each do |auction| %>
+      <tr>
+        <td><%= auction.name %></td>
+        <td><%= auction.description %></td>
+        <td><%= auction.starting_bid %></td>
+        <td><%= auction.deadline %></td>
+        <td><%= auction.current_price %></td>
+        <td><%= image_tag(auction.image, style:"width:25%") if auction.image.attached? %></td>
+        <td><%= link_to 'Show', auction %></td>
+        <td><%= link_to 'Edit', edit_auction_path(auction) %></td>
+        <td><%= link_to 'Destroy', auction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Auction', new_auction_path %>

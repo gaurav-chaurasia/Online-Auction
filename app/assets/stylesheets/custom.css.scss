@@ -1,0 +1,52 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#bs-example-navbar-collapse-1 {
+    padding-top: 10px;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+#logo {
+    font-size:3rem;
+    margin: 10px;
+    background-size: 200% auto;
+    width: 23rem;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    display: inline-block;
+    align-content: center;
+    color: black;
+    opacity: 60%;
+}
+#logo:hover {
+    color: green;
+    transition-duration: 0.5s;
+}
+#logout-btn {
+    color: white;
+    padding: 1.5rem 3rem;
+}
+#logout-btn:hover {
+    transition-duration: 0.3s;
+    color: #d9534f;
+    border-color: #d9534f;
+}
+#login-btn {
+    color: white;
+    padding: 1.5rem 4rem;
+}
+#login-btn:hover {
+    transition-duration: 0.3s;
+    color: #0275d8;
+    border-color: #0275d8;
+}
+
+// center any thing with center class
+.center {
+    text-align: center;
+}
+.navbar-nav  li  .dropdown-menu {
+    margin-top: 0;
+    border-radius: 1rem;
+    padding: 1rem;
+}
