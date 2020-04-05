@@ -23,6 +23,10 @@
     color: green;
     transition-duration: 0.5s;
 }
+#droplist {
+    color :black;
+    padding: 1.5rem 3rem;
+}
 #logout-btn {
     color: white;
     padding: 1.5rem 3rem;
@@ -50,4 +54,71 @@
     margin-top: 0;
     border-radius: 1rem;
     padding: 1rem;
+}
+.no-padding {
+    padding: 0 !important;
+}
+.left-padding {
+    padding-left: 15px !important;
+}
+.details {
+    height: 50rem;
+    margin: 2rem 0rem;
+    border: solid 1px #dbd8d8;
+}
+
+.details:hover {
+    box-shadow: 3px 3px 10px 0.1px #e4e2e2;
+}
+.show-btn {
+    -ms-transform: rotate(270deg); 
+    -webkit-transform: rotate(270deg); 
+    transform: rotate(270deg);
+}
+.relocate1{
+    margin: 4.1rem 1.5rem;
+}
+.relocate2{
+    margin: 4.1rem 0.5rem;
+}
+.relocate3{
+    margin: 4.1rem 1.45rem;
+}
+.user-details {
+    // height: 18rem;
+    margin: 5rem 30rem;
+    border-radius: 1em;
+    box-shadow: 0px 1px 30px 0.1px #d4d4d4;
+}
+.home_page_touchup {
+    height: 55rem;
+    margin: 1rem 1rem;
+    padding: 0rem;
+}
+.home_page_touchup:hover {
+    margin: 1rem 1rem;
+    box-shadow: 0px 0px 30px 0.1px #d4d4d4;
+}
+.user-show-page {
+
+}
+.user-show-page:hover {
+    box-shadow: 0px 0px 30px 0.1px #d4d4d4;
+}
+.footer-item {
+ 
+    text-align: center;
+    color: #767b85;
+    padding: 1rem;
+}
+.footer {
+    background-color:#2a303b;
+    padding: 2.5rem;
+    margin-top: 2rem;
+}
+.footer-icons {
+    margin:0rem 2rem;
+}
+.footer-icons:hover {
+    opacity: 0.3;
 }

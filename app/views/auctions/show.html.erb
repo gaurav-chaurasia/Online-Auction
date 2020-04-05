@@ -4,34 +4,50 @@
   </div>
 <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @auction.name %>
-</p>
+<div class="row thumbnail" style="padding: 0px;">
+    <div class ="col-xs-12 col-md-7 "style="padding: 0px;">
+        <%= image_tag(@auction.image, style: "width:100%; height:400px") if @auction.image.attached? %>
+    </div>
+    <div class= "col-xs-12 col-md-5 ">
+        <h2 class="center"><%= @auction.name %></h2>
+        <h3>STARTING BID: <%= @auction.starting_bid %> &#x20B9; | CURRENT PRICE: <%= @auction.current_price %> &#x20B9;</h3> 
+        
+        <h3>Description</h3>
+        <p><%= @auction.description%></p>
+        
+        <h3>Deadline for auction</h3>
+        <p><%= @auction.deadline%></p>
+        
+        <% if user_signed_in? && current_user == @auction.user %>
+            <%= link_to 'Edit the Details', edit_auction_path, class:"btn btn-sm btn-primary " %>
+            <%= link_to 'Delete the product', auction_path(@auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+            <%= link_to 'Back', :back, class:"btn btn-sm btn-default " %>
+        <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @auction.description %>
-</p>
-
-<p>
-  <strong>Starting bid:</strong>
-  <%= @auction.starting_bid %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= @auction.deadline %>
-</p>
-
-<p>
-  <strong>Current price:</strong>
-  <%= @auction.current_price %>
-</p>
-
-<div>
-  <strong>Image: </strong>
-  <%= image_tag(@auction.image, style:"width:50%") if @auction.image.attached? %>
+        <% if @auction.user != current_user %>
+            <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-success" %>
+            <%= link_to 'Bid Now', '#', class:"btn btn-sm btn-success" %>
+        <% end %>
+    </div>
 </div>
-<%= link_to 'Edit', edit_auction_path(@auction) %> |
-<%= link_to 'Back', auctions_path %>
+<div>
+    <hr>
+    <p>Seller Details </p>
+    <h2><%= link_to @auction.user.full_name, @auction.user == current_user && user_signed_in? ? user_path(@auction.user) : '#'%></h2>
+    <small> 
+        joined Online-Auction: <%= time_ago_in_words(@auction.created_at)%> ago,
+        last updated: <%= time_ago_in_words(@auction.updated_at) %> ago 
+    </small>
+    
+    <h3>email address</h3>
+    <p><%= @auction.user.email%></p>
+
+    <h3>contact number</h3>
+    <p><%= @auction.user.contact_number%></p>
+    
+    <h3>address</h3>
+    <p><%= @auction.user.address%></p>
+</div>
+
+
+

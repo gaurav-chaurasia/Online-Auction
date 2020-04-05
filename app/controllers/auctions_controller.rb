@@ -1,11 +1,11 @@
 class AuctionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   before_action :set_auction, only: [:show, :edit, :update, :destroy]
 
   # GET /auctions
   # GET /auctions.json
   def index
-    @auctions = Auction.where(user_id: current_user.id)
+    @auctions = Auction.all
   end
 
   # GET /auctions/1

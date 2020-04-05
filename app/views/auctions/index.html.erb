@@ -3,38 +3,29 @@
     <a href="#" class="close" data-dismiss="alert">&#215;</a>
   </div>
 <% end %>
-<h1>Auctions</h1>
+<h1 class="center" style="margin:3rem;">Products for Auction</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Starting bid</th>
-      <th>Deadline<br><small>yyyy-mm-dd</small></th>
-      <th>Current price</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @auctions.each do |auction| %>
+  <% if auction.user != current_user %>
+      <div class="col-sm-6 col-md-4 "style="padding:0rem;">
+        <div class="thumbnail center home_page_touchup">
+          <%= image_tag(auction.image, style:"height:241px; width:100%") if auction.image.attached? %>
+          <div class="caption">
+            <h4 class="center"> starting_bid: <%= auction.starting_bid %> <% if auction.bidder? %> <%= auction.current_price %> <%end%></h4>
+            <h3 class="center"><%= auction.name %></h3>
+            <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 200) %></p>
+            
+            <p><%= link_to 'Bid Now', auction, class: "btn btn-sm btn-primary" %> <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> <%= link_to 'Back', :back, class: "btn btn-sm btn-default"%> </p>
+            <div class = "relocate-time">
+              <small>    
+                  added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
+                  last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
+              </small>
+              <h4>Deadline: <strong><%= auction.deadline%></strong></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+<% end %>
 
-  <tbody>
-    <% @auctions.each do |auction| %>
-      <tr>
-        <td><%= auction.name %></td>
-        <td><%= auction.description %></td>
-        <td><%= auction.starting_bid %></td>
-        <td><%= auction.deadline %></td>
-        <td><%= auction.current_price %></td>
-        <td><%= image_tag(auction.image, style:"width:25%") if auction.image.attached? %></td>
-        <td><%= link_to 'Show', auction %></td>
-        <td><%= link_to 'Edit', edit_auction_path(auction) %></td>
-        <td><%= link_to 'Destroy', auction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Auction', new_auction_path %>
