@@ -1,0 +1,12 @@
+<%= form_with(model: bid, local: true) do |form| %>
+    <%= render "devise/shared/error_messages", resource: bid %>
+
+    <div class="field">
+        <%= form.label :Your_Bid  %>
+        <%= form.file_field :amount %>
+    </div>
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+
+<% end %>

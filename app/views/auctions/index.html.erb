@@ -8,21 +8,21 @@
 <% @auctions.each do |auction| %>
   <% if auction.user != current_user %>
       <div class="col-sm-6 col-md-4 "style="padding:0rem;">
-        <div class="thumbnail center home_page_touchup">
+        <div class="thumbnail home_page_touchup">
           <%= image_tag(auction.image, style:"height:241px; width:100%") if auction.image.attached? %>
           <div class="caption">
-            <h4 class="center"> starting_bid: <%= auction.starting_bid %> <% if auction.bidder? %> <%= auction.current_price %> <%end%></h4>
+            <h4 class="center">STARTING BID: <%= auction.starting_bid %> &#x20B9; <br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h4>
             <h3 class="center"><%= auction.name %></h3>
-            <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 200) %></p>
+            <p class="center"><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
             
-            <p><%= link_to 'Bid Now', auction, class: "btn btn-sm btn-primary" %> <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> <%= link_to 'Back', :back, class: "btn btn-sm btn-default"%> </p>
-            <div class = "relocate-time">
+            <p class="center"><%= link_to 'Bid Now', auction, class: "btn btn-sm btn-primary" %> <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> <%= link_to 'Back', :back, class: "btn btn-sm btn-default"%> </p>
+    
               <small>    
                   added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                   last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
               </small>
-              <h4>Deadline: <strong><%= auction.deadline%></strong></h4>
-            </div>
+              <h4>auction ends in: <strong><%= time_ago_in_words(auction.deadline) %></strong></h4>
+  
           </div>
         </div>
       </div>

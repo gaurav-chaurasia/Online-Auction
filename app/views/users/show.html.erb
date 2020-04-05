@@ -1,4 +1,4 @@
-<h1 class="center" style="margin:3rem;"> User Dashboard | products for auction</h1>
+<h2 class="center" style="margin:3rem;"> User Dashboard | products for auction</h2>
 
 <% current_user.auctions.each do |auction|%>
     
@@ -14,8 +14,8 @@
             <h3>Description</h3>
             <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
             
-            <h3>Deadline for auction</h3>
-            <p><%= auction.deadline%></p>
+            <h3>Deadline for auction: <%= time_ago_in_words(auction.deadline) %></h3>
+            <p></p><br><br>
             
             <% if user_signed_in? && current_user == auction.user %>
                 <%= link_to 'Edit Details', edit_auction_path(auction), class:"btn btn-sm btn-primary " %>
@@ -24,13 +24,20 @@
                 <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
             <% end %>
 
-            <small> <br><br>
-                <strong>
-                    <%= auction.user.full_name if auction.user %>
-                </strong> : <br>     
+            <small> <br>
+                [ owner:<strong>
+                        <%= auction.user.full_name if auction.user %>
+                    </strong> ]  
+                [ claimed By: <% if auction.bidder %>  
+                            <strong><%= auction.bidder.full_name if auction.bidder %></strong>
+                            <% else %> 
+                            Not yet claimed
+                            <% end %> ] <br>     
                 added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                 last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
             </small>
         </div>
     </div>
 <% end%>
+<hr>
+<h2 class="center" style="margin:5rem;"> User Dashboard | Claimed product</h2>

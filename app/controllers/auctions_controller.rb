@@ -27,7 +27,8 @@ class AuctionsController < ApplicationController
   def create
     @auction = Auction.new(auction_params)
     @auction.user = current_user
-
+    @auction.current_user = @auction.starting_bid
+    
     respond_to do |format|
       if @auction.save
         format.html { redirect_to @auction, success: 'Auction was successfully created.' }

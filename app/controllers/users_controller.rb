@@ -9,5 +9,6 @@ class UsersController < ApplicationController
     # Get user dashboard
     # Requests: GET
     def show
+        @users = User.all
     end
 end
