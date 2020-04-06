@@ -1,9 +1,11 @@
-# README
+# Online Auction 
 
-## step:1 ~>
+> Note: All steps were performed using Ubuntu 18.04.4 LTS.
+
+## step:1   
 
 
-## Installation needed for running application
+### Installation needed for running application
 
 
 a) Install MySQL and setup using these commands, make sure the password you select is easy to remember
@@ -79,7 +81,7 @@ Note: For some of the js gems
 ```
 * The above steps starts the development server on localhost:3000. Go to `http://localhost:3000/` in your browser. It will automatically redirect you to the Home page and then ask for Signup or Login.
 
-## step:2~> 
+## step:2   
 
 * bootstrap-sass 3 used for styling many parts of the app and after adding small changes final could build beautiful UI
 
@@ -109,8 +111,10 @@ Note: For some of the js gems
 * user can have their profile picture and some more details 
 * live chat functionality can be added so buyer and seller can discuss about the product any time
 
-References
-so many references used so can't list out but some of them are
+> some links
+      
 `https://guides.rubyonrails.org/`  
 `https://github.com/twbs/bootstrap-sass`    
+`https://github.com/heartcombo/devise`   
+`https://github.com/bokmann/font-awesome-rails`   
 

@@ -1,5 +1,5 @@
 class BidsController < ApplicationController 
-    before_action :set_bid, only: [:show, :edit, :update, :destroy]
+    before_action :set_bid, only: [:show, :edit, :update]
     # Requests: GET
     def index
         @auction = Auction.find(params[:item_id])
@@ -47,7 +47,7 @@ class BidsController < ApplicationController
     # Requests: Patch/Put 
     def update
         if @bid.update(bid_params)
-            redirect_to user(current_user)
+            redirect_to user_path(current_user)
             # :success 'Bid is updated successfully'
         else
             render 'edit'
