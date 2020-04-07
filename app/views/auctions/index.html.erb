@@ -8,7 +8,7 @@
 <% @auctions.each do |auction| %>
   <% if auction.user != current_user %>
       <div class="col-sm-6 col-md-4 "style="padding:0rem;">
-        <div class="thumbnail home_page_touchup">
+        <div class="thumbnail home-page-touchup">
           <%= image_tag(auction.image, style:"height:241px; width:100%") if auction.image.attached? %>
           <div class="caption">
             <h4 class="center">STARTING BID: <%= auction.starting_bid %> &#x20B9; <br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h4>

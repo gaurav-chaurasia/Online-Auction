@@ -2,9 +2,13 @@
 
     
 <% @users.each do |user|%>
-    <div class="center">
-        <div class="col-sm-5 user-details">
-            <h2 class="center"><%= link_to user.full_name, user == current_user ? user_path(user) : '#' %></h2>
+    
+    <div class="row thumbnail user-index-page">
+        <div class ="col-xs-12 col-md-4 "style= "width:200px; height:180px; background-color:#f4f4f4">
+            
+        </div>
+        <div class= "col-xs-12 col-md-8 ">
+            <h2><%= link_to user.full_name, user == current_user ? user_path(user) : '#' %></h2>
             <small>
                 <h5><%= pluralize(user.auctions.count,"product") if user.auctions %></h5>
             </small>
@@ -15,6 +19,6 @@
             <% if user_signed_in? &&  current_user == user %>
                 <%= link_to 'Delete your account', registration_path(current_user), method: :delete, class:"btn btn-sm btn-danger", data: { confirm: "aur you sure ?"} %>
             <% end %><br><br>
-       </div>
-    </div>
+        </div>
+    </div> 
 <% end%>

@@ -1,9 +1,11 @@
 <%= form_with(model: bid, local: true) do |form| %>
-    <%= render "devise/shared/error_messages", resource: bid %>
 
     <div class="field">
         <%= form.label :Your_Bid  %>
-        <%= form.file_field :amount %>
+        <%= form.number_field :amount %>
+    </div>
+    <div>
+        <%= hidden_field_tag "auction_id", @id %>
     </div>
     <div class="actions">
         <%= form.submit %>

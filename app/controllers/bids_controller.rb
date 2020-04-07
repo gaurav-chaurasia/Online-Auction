@@ -2,7 +2,7 @@ class BidsController < ApplicationController
     before_action :set_bid, only: [:show, :edit, :update]
     # Requests: GET
     def index
-        @auction = Auction.find(params[:item_id])
+        @auction = Auction.find(params[:auction_id])
         @bid = @auction.bids.build
         # @bids = current_user.bids
     end
@@ -10,6 +10,8 @@ class BidsController < ApplicationController
     # Requests: GET
     def new
         @bid = Bid.new
+        @auction = Auction.find(params[:id])
+        # @id = params.dig(:new, :id) 
     end
 
     # Requests: GET
@@ -19,12 +21,11 @@ class BidsController < ApplicationController
     # after new create action POST and takes care of submmition
     # Requests: POST
     def create
-        @auction = Auction.find(params[:auction_id])
-        @bid = @auction.bids.new(bid_params)
+        # @bid = @auction.bids.new(bid_params)
 
-        # @bid = Bid.new(bid_params)
+        @bid = @auction.bids.new(bid_params)
         # @auction = Auction.find(params[:auction_id])
-        if can_bid(@auction)? 
+        if (can_bid?(@auction, @bid) and in_progress?(@auction))
             @bid.user = current_user
             @bid.auction = @auction
             @auction.bidder = current_user
@@ -57,16 +58,17 @@ class BidsController < ApplicationController
 
     private
 
-    def set_bid
-        @bid = Bid.find(params[:id])
-    end
-      
-    def bid_params
-        params.require(:bid).permit(:amount)
-    end
-    
-    def update_auction
-        @auction.current_price = @bid.amount
-        @auction.save
-    end
+        def set_bid
+            @bid = Bid.find(params[:id])
+        end
+        
+        def bid_params
+            params.require(:bid).permit(:amount, :auction_id, :id)
+        end
+        
+        def update_auction
+            @auction.current_price = @bid.amount
+            @auction.save
+        end
+    end 
 end

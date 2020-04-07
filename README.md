@@ -81,7 +81,7 @@ Note: For some of the js gems
 ```
 * The above steps starts the development server on localhost:3000. Go to `http://localhost:3000/` in your browser. It will automatically redirect you to the Home page and then ask for Signup or Login.
 
-## step:2   
+
 
 * bootstrap-sass 3 used for styling many parts of the app and after adding small changes final could build beautiful UI
 

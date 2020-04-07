@@ -8,6 +8,47 @@
             <%= image_tag(auction.image, style: "width: 100%; height:400px") if auction.image.attached? %>
         </div>
         <div class= "col-sm-12 col-md-5 ">
+            <h2 class="center"><%= auction.name %> <%= current_user%> </h2>
+            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<% if current_user.bidder %> | CURRENT PRICE: <%= auction.current_price %> &#x20B9; <%end%></h3> 
+            
+            <h3>Description</h3>
+            <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
+            
+            <h3>Deadline for auction: <%= time_ago_in_words(auction.deadline) %></h3>
+            <p></p><br><br>
+            
+            <% if user_signed_in? && current_user == auction.user %>
+                <%= link_to 'Edit Details', edit_auction_path(auction), class:"btn btn-sm btn-primary " %>
+                <%= link_to 'Delete product', auction_path(auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-default" %>
+                <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
+            <% end %>
+
+            <small> <br>
+                [ owner:<strong>
+                        <%= auction.user.full_name if auction.user %>
+                    </strong> ]  
+                [ claimed By: <% if auction.bidder %>  
+                            <strong><%=  @users.find(auction.bidder).full_name if auction.bidder or @users.find(auction.bidder) == auction.bidder %></strong>
+                            <% else %> 
+                                <strong>Not yet claimed</strong>
+                            <% end %> ] <br>     
+                added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
+                last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
+            </small>
+        </div>
+    </div>
+<% end%>
+<hr>
+<h2 class="center" style="margin:5rem;"> User Dashboard | Claimed product</h2>
+
+<% current_user.auctions.each do |auction|%>
+
+    <div class="row thumbnail user-show-page" style="padding: 0px;">
+        <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
+            <%= image_tag(auction.image, style: "width: 100%; height:400px") if auction.image.attached? %>
+        </div>
+        <div class= "col-sm-12 col-md-5 ">
             <h2 class="center"><%= auction.name %></h2>
             <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<% if auction.bidder? %> | CURRENT PRICE: <%= auction.current_price %> &#x20B9; <%end%></h3> 
             
@@ -29,9 +70,9 @@
                         <%= auction.user.full_name if auction.user %>
                     </strong> ]  
                 [ claimed By: <% if auction.bidder %>  
-                            <strong><%= auction.bidder.full_name if auction.bidder %></strong>
+                            <strong><%=  @users.find(auction.bidder).full_name if auction.bidder or @users.find(auction.bidder) == auction.bidder %></strong>
                             <% else %> 
-                            Not yet claimed
+                                <strong>Not yet claimed</strong>
                             <% end %> ] <br>     
                 added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                 last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
@@ -39,5 +80,3 @@
         </div>
     </div>
 <% end%>
-<hr>
-<h2 class="center" style="margin:5rem;"> User Dashboard | Claimed product</h2>
