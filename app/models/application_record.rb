@@ -9,8 +9,8 @@ class ApplicationRecord < ActiveRecord::Base
     auction.deadline < DateTime.now
   end
 
-  def can_bid?(auction, bid)
-    bid.amount >= auction.starting_bid && bid.amount >= auction.current_price && !auction_over?
+  def can_bid?(auction, amount)
+    amount >= auction.starting_bid && amount >= auction.current_price && !auction_over?(auction)
   end
 
 

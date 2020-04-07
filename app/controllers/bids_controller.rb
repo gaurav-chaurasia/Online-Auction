@@ -26,15 +26,17 @@ class BidsController < ApplicationController
         # print "check" + params[:auction_id]
         # print "check" + params[:create][:auction_id]
         @bid = Bid.new(@bid_params)
-        print @bid.amount 
+        @bid.amount = params[:bid][:amount]
 
-        if (1)
+        if ( true )
             @bid.user = current_user
             @bid.auction_id = @auction.id
             @auction.bidder_id = current_user.id
             @auction.current_price = @bid.amount
             @auction.save
+        # print "check" + params[:auction_id]
 
+        # print params[:bid][:amount]
             respond_to do |format|
             if @bid.save
                 format.html { redirect_to auctions_path, success: 'Bid was successfully created.' }

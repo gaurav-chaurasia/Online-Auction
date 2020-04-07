@@ -1,14 +1,20 @@
-<%= form_with(model: bid, local: true) do |form| %>
+<div class="row" style="margin:3rem;">
+    <div class="col-sm-offset-2 col-xs-8">
+        <%= form_with(model: bid, local: true) do |form| %>
+        <%= render "devise/shared/error_messages", resource: bid %>
 
-    <div class="field">
-        <%= form.label :Your_Bid  %>
-        <%= form.number_field :amount %>
-    </div>
-    <div>
-        <%= hidden_field_tag "auction_id", @id %>
-    </div>
-    <div class="actions">
-        <%= form.submit %>
-    </div>
+            <div class="form-group">
+                <%= form.label :Time_to_bid  %>
+                <%= form.number_field :amount, class: "form-control", placeholder: "Enter your bid" %>
+            </div>
+            <div>
+                <%= hidden_field_tag "auction_id", @id %>
+            </div>
+            <div class="form-group center">
+                <%= form.submit class: "btn btn-primary btn-md"%>
+                <%= link_to 'Back', :back ? :back : auctions_path, class: "btn btn-default btn-md" %>
+            </div>
 
-<% end %>
+        <% end %>
+    </div>
+</div>
