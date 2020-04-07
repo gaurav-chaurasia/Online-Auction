@@ -5,11 +5,11 @@
 
     <div class="row thumbnail user-show-page" style="padding: 0px;">
         <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
-            <%= image_tag(auction.image, style: "width: 100%; height:400px") if auction.image.attached? %>
+            <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
         </div>
         <div class= "col-sm-12 col-md-5 ">
-            <h2 class="center"><%= auction.name %> <%= current_user%> </h2>
-            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<% if current_user.bidder %> | CURRENT PRICE: <%= auction.current_price %> &#x20B9; <%end%></h3> 
+            <h2 class="center"><%= auction.name %></h2>
+            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h3> 
             
             <h3>Description</h3>
             <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
@@ -28,8 +28,8 @@
                 [ owner:<strong>
                         <%= auction.user.full_name if auction.user %>
                     </strong> ]  
-                [ claimed By: <% if auction.bidder %>  
-                            <strong><%=  @users.find(auction.bidder).full_name if auction.bidder or @users.find(auction.bidder) == auction.bidder %></strong>
+                [ claimed By: <% if auction.bidder_id %>  
+                            <strong><%=  @users.find(auction.bidder_id).full_name if @users.find(auction.bidder_id) == auction.bidder_id %></strong>
                             <% else %> 
                                 <strong>Not yet claimed</strong>
                             <% end %> ] <br>     
@@ -46,11 +46,11 @@
 
     <div class="row thumbnail user-show-page" style="padding: 0px;">
         <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
-            <%= image_tag(auction.image, style: "width: 100%; height:400px") if auction.image.attached? %>
+            <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
         </div>
         <div class= "col-sm-12 col-md-5 ">
             <h2 class="center"><%= auction.name %></h2>
-            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<% if auction.bidder? %> | CURRENT PRICE: <%= auction.current_price %> &#x20B9; <%end%></h3> 
+            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9; </h3> 
             
             <h3>Description</h3>
             <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
@@ -69,8 +69,8 @@
                 [ owner:<strong>
                         <%= auction.user.full_name if auction.user %>
                     </strong> ]  
-                [ claimed By: <% if auction.bidder %>  
-                            <strong><%=  @users.find(auction.bidder).full_name if auction.bidder or @users.find(auction.bidder) == auction.bidder %></strong>
+                [ claimed By: <% if auction.bidder_id %>  
+                            <strong><%=  @users.find(auction.bidder_id).full_name if @users.find(auction.bidder_id) == auction.bidder_id %></strong>
                             <% else %> 
                                 <strong>Not yet claimed</strong>
                             <% end %> ] <br>     

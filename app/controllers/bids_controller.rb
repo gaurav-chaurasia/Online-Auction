@@ -3,14 +3,15 @@ class BidsController < ApplicationController
     # Requests: GET
     def index
         @auction = Auction.find(params[:auction_id])
-        @bid = @auction.bids.build
+        @bid = Bid.all
         # @bids = current_user.bids
     end
 
     # Requests: GET
     def new
         @bid = Bid.new
-        @auction = Auction.find(params[:id])
+        @id = params[:id]
+        # @auction = Auction.find(params[:id])
         # @id = params.dig(:new, :id) 
     end
 
@@ -21,19 +22,22 @@ class BidsController < ApplicationController
     # after new create action POST and takes care of submmition
     # Requests: POST
     def create
-        # @bid = @auction.bids.new(bid_params)
+        @auction = Auction.find(params[:auction_id])
+        # print "check" + params[:auction_id]
+        # print "check" + params[:create][:auction_id]
+        @bid = Bid.new(@bid_params)
+        print @bid.amount 
 
-        @bid = @auction.bids.new(bid_params)
-        # @auction = Auction.find(params[:auction_id])
-        if (can_bid?(@auction, @bid) and in_progress?(@auction))
+        if (1)
             @bid.user = current_user
-            @bid.auction = @auction
-            @auction.bidder = current_user
-            update_auction
+            @bid.auction_id = @auction.id
+            @auction.bidder_id = current_user.id
+            @auction.current_price = @bid.amount
+            @auction.save
 
             respond_to do |format|
             if @bid.save
-                format.html { redirect_to user(current_user), success: 'Bid was successfully created.' }
+                format.html { redirect_to auctions_path, success: 'Bid was successfully created.' }
                 # redirect_to user(current_user)
                 # :success 'Bid was successfully created.'
             else
@@ -56,7 +60,7 @@ class BidsController < ApplicationController
         end
     end
 
-    private
+# private
 
         def set_bid
             @bid = Bid.find(params[:id])
@@ -66,9 +70,5 @@ class BidsController < ApplicationController
             params.require(:bid).permit(:amount, :auction_id, :id)
         end
         
-        def update_auction
-            @auction.current_price = @bid.amount
-            @auction.save
-        end
     end 
 end

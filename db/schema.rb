@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_084747) do
+ActiveRecord::Schema.define(version: 2020_04_07_040641) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -38,11 +38,14 @@ ActiveRecord::Schema.define(version: 2020_04_05_084747) do
     t.text "description"
     t.float "starting_bid"
     t.datetime "deadline"
-    t.integer "bidder"
     t.float "current_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "bidder_id"
+    t.bigint "buyer_id"
+    t.index ["bidder_id"], name: "index_auctions_on_bidder_id"
+    t.index ["buyer_id"], name: "index_auctions_on_buyer_id"
     t.index ["user_id"], name: "index_auctions_on_user_id"
   end
 

@@ -16,18 +16,20 @@
         <p><%= @auction.description%></p>
         
         <h3>Deadline for auction: <%= time_ago_in_words(@auction.deadline) %></h3>
-        <p></p><br>
+        <br>
         
         <% if user_signed_in? && current_user == @auction.user %>
             <%= link_to 'Edit the Details', edit_auction_path, class:"btn btn-sm btn-primary " %>
             <%= link_to 'Delete the product', auction_path(@auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+            <%= link_to 'Back to User Dashboard', user_path(current_user), class:"btn btn-sm btn-default" %>
             <%= link_to 'Back', :back, class:"btn btn-sm btn-default " %>
         <% end %>
 
         <% if @auction.user != current_user %>
             <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-success" %>
             <%= link_to 'Bid Now', new_bid_path(:id => @auction.id), class:"btn btn-sm btn-success" %>
-        <% end %>
+        <% end %><br>
+        <small>last updated: <%= time_ago_in_words(@auction.updated_at) %> ago </small>
     </div>
 </div>
 <div>
@@ -35,7 +37,7 @@
     <h2><%= link_to @auction.user.full_name, @auction.user == current_user && user_signed_in? ? user_path(@auction.user) : '#'%></h2>
     <small> 
         joined Online-Auction: <%= time_ago_in_words(@auction.created_at)%> ago,
-        last updated: <%= time_ago_in_words(@auction.updated_at) %> ago 
+        last updated: <%= time_ago_in_words(@auction.user.updated_at) %> ago 
     </small>
     
     <h3>email address</h3>
