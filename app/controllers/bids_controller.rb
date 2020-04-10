@@ -45,7 +45,7 @@ class BidsController < ApplicationController
             
             respond_to do |format|
             if @bid.save
-                format.html { redirect_to auctions_path, success: 'Bid was successfully created.' }
+                format.html { redirect_to bids_path(:id => @auction.id), success: 'Bid was successfully created.' }
                 # redirect_to user(current_user)
                 # :success 'Bid was successfully created.'
             else

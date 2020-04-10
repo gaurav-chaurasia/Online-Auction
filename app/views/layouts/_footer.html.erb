@@ -1,9 +1,18 @@
 <div class="footer">
-    <div class="foter-icons footer-item ">
-        <a href="https://www.instagram.com/gkc_3/"><img class="footer-icons" src="app/assets/images/instagram.png" alt=""></a>
-        <a href="https://github.com/gaurav-chaurasia"><img class="footer-icons" src="app/assets/images/github.png" alt=""></a>
-        <a href="https://www.linkedin.com/in/gaurav-chaurasia/"><img class="footer-icons" src="app/assets/images/linkedin.png" alt=""></a>
-        <a href="https://www.facebook.com/profile.php?id=100008466213205"><img class="footer-icons" src="app/assets/images/facebook.png" alt=""></a>
+    <div>
+        <a href="https://www.instagram.com/gkc_3/"> 
+            <%= image_tag(asset_url("/assets/instagram.png"), class:"footer-icons") %>
+        </a>
+        <a href="https://github.com/gaurav-chaurasia">
+            <%= image_tag(asset_url("/assets/github.png"), class:"footer-icons") %>
+        </a>
+        <a href="https://www.linkedin.com/in/gaurav-chaurasia/">
+            <%= image_tag(asset_url("/assets/linkedin.png"), class:"footer-icons") %>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100008466213205">
+            <%= image_tag(asset_url("/assets/facebook.png"), class:"footer-icons") %>
+        </a>
+        <span class="footer-item">Copyright &copy;2020 All rights reserved</span>
     </div>
-    <div class="footer-item">Copyright &copy;2020 All rights reserved</div>
 </div>
+<%# class="footer-item " %>

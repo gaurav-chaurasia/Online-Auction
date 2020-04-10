@@ -1,4 +1,8 @@
-
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %>
+    <a href="#" class="close" data-dismiss="alert">&#215;</a>
+  </div>
+<% end %>
 
 <div class= "col-xs-12 col-md-5 ">
     
@@ -31,7 +35,7 @@
             <br>
             
             <% if user_signed_in? && current_user == @auction.user %>
-                <%= link_to 'Edit the Details', edit_auction_path, class:"btn btn-sm btn-primary " %>
+                <%= link_to 'Edit the Details', edit_auction_path(@auction), class:"btn btn-sm btn-primary " %>
                 <%= link_to 'Delete the product', auction_path(@auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
                 <%= link_to 'Back to User Dashboard', user_path(current_user), class:"btn btn-sm btn-default" %>
                 <%= link_to 'Back', :back, class:"btn btn-sm btn-default " %>
