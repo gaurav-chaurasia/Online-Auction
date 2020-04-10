@@ -5,13 +5,23 @@
 
             <div class="form-group">
                 <%= form.label :Time_to_bid  %>
-                <%= form.number_field :amount, class: "form-control", placeholder: "Enter your bid" %>
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                <div class="input-group-addon">&#x20B9;</div>
+                    <%= form.number_field :amount, class: "form-control", placeholder: "Enter Amount", autofocus: true %>
+                <div class="input-group-addon">.00</div>
+                </div>
             </div>
+
             <div>
                 <%= hidden_field_tag "auction_id", @id %>
             </div>
+
+
             <div class="form-group center">
-                <%= form.submit class: "btn btn-primary btn-md"%>
+                <button class="btn btn-primary btn-md" data-toggle="tooltip" data-placement="left" title="bid more than current price">
+                    Create Bid<% form.submit %>
+                </button>                
                 <%= link_to 'Back', :back ? :back : auctions_path, class: "btn btn-default btn-md" %>
             </div>
 

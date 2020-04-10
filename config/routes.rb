@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'auctions#index'
 
   resources :users, only: [:index, :show]
-  resources :bids, except: [:show, :destroy]
+  resources :bids, only: [:index, :show, :new, :create]
 
   # get 'show', to: 'users#show'
   # get 'index', to: 'users#index'

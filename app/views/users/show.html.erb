@@ -1,12 +1,22 @@
-<h2 class="center" style="margin:3rem;"> User Dashboard | products for auction</h2>
+<h2 class="center" style="margin:3rem;"> User Dashboard | Your products for auction</h2>
 
 <% current_user.auctions.each do |auction|%>
     
 
     <div class="row thumbnail user-show-page" style="padding: 0px;">
+        
         <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
-            <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
+            <% if auction.image.attached? %>
+                <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
+            <% else %>
+                <div class ="col-xs-12 col-md-4 "style= "width:100%; height:41rem; background-color:#f4f4f4">
+                    <div class="no-image-massage"> 
+                        No Image Available
+                    </div>
+                </div>
+            <% end %>
         </div>
+
         <div class= "col-sm-12 col-md-5 ">
             <h2 class="center"><%= auction.name %></h2>
             <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h3> 
@@ -14,7 +24,13 @@
             <h3>Description</h3>
             <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
             
-            <h3>Deadline for auction: <%= time_ago_in_words(auction.deadline) %></h3>
+            <h3>
+                <% if in_progress?(auction.id) %> 
+                    Deadline for auction: <%= time_ago_in_words(auction.deadline) %>
+                <% else %>
+                    <h4>Auction is over for this product</h4>
+                <% end %>
+            </h3>
             <p></p><br><br>
             
             <% if user_signed_in? && current_user == auction.user %>
@@ -25,58 +41,20 @@
             <% end %>
 
             <small> <br>
-                [ owner:<strong>
-                        <%= auction.user.full_name if auction.user %>
-                    </strong> ]  
-                [ claimed By: <% if auction.bidder_id %>  
-                            <strong><%=  @users.find(auction.bidder_id).full_name if @users.find(auction.bidder_id) == auction.bidder_id %></strong>
-                            <% else %> 
-                                <strong>Not yet claimed</strong>
-                            <% end %> ] <br>     
+                [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
+                <% if auction.bidder_id %>  
+                    <% if auction.deadline <= DateTime.now %>
+                        [ claimed by: <strong><%=  @users.find(auction.bidder_id).full_name %></strong>
+                    <% else %>
+                        [ current bidder: <strong> <%=  @users.find(auction.bidder_id).full_name %></strong>
+                    <% end %>
+                <% else %> 
+                        [ claimed by: <strong>Not yet claimed</strong>
+                <% end %> ] <br>     
                 added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                 last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
             </small>
         </div>
     </div>
 <% end%>
-<hr>
-<h2 class="center" style="margin:5rem;"> User Dashboard | Claimed product</h2>
-
-<% current_user.auctions.each do |auction|%>
-
-    <div class="row thumbnail user-show-page" style="padding: 0px;">
-        <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
-            <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
-        </div>
-        <div class= "col-sm-12 col-md-5 ">
-            <h2 class="center"><%= auction.name %></h2>
-            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9; </h3> 
-            
-            <h3>Description</h3>
-            <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
-            
-            <h3>Deadline for auction: <%= time_ago_in_words(auction.deadline) %></h3>
-            <p></p><br><br>
-            
-            <% if user_signed_in? && current_user == auction.user %>
-                <%= link_to 'Edit Details', edit_auction_path(auction), class:"btn btn-sm btn-primary " %>
-                <%= link_to 'Delete product', auction_path(auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
-                <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-default" %>
-                <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
-            <% end %>
-
-            <small> <br>
-                [ owner:<strong>
-                        <%= auction.user.full_name if auction.user %>
-                    </strong> ]  
-                [ claimed By: <% if auction.bidder_id %>  
-                            <strong><%=  @users.find(auction.bidder_id).full_name if @users.find(auction.bidder_id) == auction.bidder_id %></strong>
-                            <% else %> 
-                                <strong>Not yet claimed</strong>
-                            <% end %> ] <br>     
-                added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
-                last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
-            </small>
-        </div>
-    </div>
-<% end%>
+<%#  here user dashboard for claimed product will be there %>

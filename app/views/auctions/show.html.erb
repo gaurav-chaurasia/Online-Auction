@@ -1,12 +1,22 @@
 <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %>
+  <div class="alert alert-<%= key %>"> 
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 
+    <%= value %>
     <a href="#" class="close" data-dismiss="alert">&#215;</a>
   </div>
 <% end %>
 
 <div class="row thumbnail" style="padding: 0px;">
     <div class ="col-xs-12 col-md-7 "style="padding: 0px;">
-        <%= image_tag(@auction.image, style: "width:100%; height:400px") if @auction.image.attached? %>
+        <% if @auction.image.attached? %>
+            <%= image_tag(@auction.image, style: "width: 100%; height:40rem") if @auction.image.attached? %>
+        <% else %>
+            <div class ="col-xs-12 col-md-4 "style= "width:100%; height:40rem; background-color:#f4f4f4">
+                <div class="no-image-massage"> 
+                    No Image Available
+                </div>
+            </div>
+        <% end %>
     </div>
     <div class= "col-xs-12 col-md-5 ">
         <h2 class="center"><%= @auction.name %></h2>
@@ -15,7 +25,13 @@
         <h3>Description</h3>
         <p><%= @auction.description%></p>
         
-        <h3>Deadline for auction: <%= time_ago_in_words(@auction.deadline) %></h3>
+        <h3>
+            <% if in_progress?(@auction.id) %> 
+                Auction ends in: <strong><%= time_ago_in_words(@auction.deadline) %></strong>
+            <% else %>
+                <h4>Auction is over for this product</h4>
+            <% end %>
+        </h3>
         <br>
         
         <% if user_signed_in? && current_user == @auction.user %>
@@ -36,7 +52,7 @@
     <p>Seller Details </p>
     <h2><%= link_to @auction.user.full_name, @auction.user == current_user && user_signed_in? ? user_path(@auction.user) : '#'%></h2>
     <small> 
-        joined Online-Auction: <%= time_ago_in_words(@auction.created_at)%> ago,
+        joined Online-Auction: <%= time_ago_in_words(@auction.user.created_at)%> ago,
         last updated: <%= time_ago_in_words(@auction.user.updated_at) %> ago 
     </small>
     

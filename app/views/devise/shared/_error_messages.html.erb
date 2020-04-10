@@ -10,7 +10,10 @@
                     <div class="panel-body">
                         <ul>
                             <% resource.errors.full_messages.each do |msg| %>
-                                <li><%= msg %></li>
+                                <li>  
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <%= msg %>
+                                </li>
                             <% end %>
                         </ul>
                     </div>

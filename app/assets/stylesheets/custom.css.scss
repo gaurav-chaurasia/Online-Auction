@@ -99,6 +99,13 @@
 .user-show-page:hover {
     box-shadow: 0px 0px 20px 0.1px #e9e3e3;
 }
+.no-image-massage {
+    margin: 0rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .footer-item {
  
     text-align: center;

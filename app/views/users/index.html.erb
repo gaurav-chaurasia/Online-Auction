@@ -4,13 +4,15 @@
 <% @users.each do |user|%>
     
     <div class="row thumbnail user-index-page">
-        <div class ="col-xs-12 col-md-4 "style= "width:200px; height:180px; background-color:#f4f4f4">
-            
+        <div class ="col-xs-12 col-md-4"style= "width:200px; height:180px; background-color:#f4f4f4">
+            <div class="no-image-massage"> 
+                No Image
+            </div>
         </div>
         <div class= "col-xs-12 col-md-8 ">
             <h2><%= link_to user.full_name, user == current_user ? user_path(user) : '#' %></h2>
             <small>
-                <h5><%= pluralize(user.auctions.count,"product") if user.auctions %></h5>
+                <h5><%= pluralize(user.auctions.count,"product for auction") if user.auctions %></h5>
             </small>
             <small> 
                 joined Online-Auction: <%= time_ago_in_words(user.created_at)%> ago,

@@ -1,0 +1,85 @@
+
+
+<div class= "col-xs-12 col-md-5 ">
+    
+    <div class="row thumbnail" style="padding: 0px;">
+        <div class ="col-xs-12 col-md-12 "style="padding: 0px;">
+            <% if @auction.image.attached? %>
+                <%= image_tag(@auction.image, style: "width: 100%;") if @auction.image.attached? %>
+            <% else %>
+                <div class ="col-xs-12 col-md-4 "style= "width:100%; height:30rem; background-color:#f4f4f4">
+                    <div class="no-image-massage"> 
+                        No Image Available
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div class= "col-xs-12 col-md-12 ">
+            <h2 class="center"><%= @auction.name %></h2>
+            <h3>STARTING BID: <%= @auction.starting_bid %> &#x20B9; <br> CURRENT PRICE: <%= @auction.current_price %> &#x20B9;</h3> 
+            
+            <h3>Description</h3>
+            <p><%= @auction.description%></p>
+            
+            <h3>
+                <% if in_progress?(@auction.id) %> 
+                    Auction ends in: <strong><%= time_ago_in_words(@auction.deadline) %></strong>
+                <% else %>
+                    <h4>Auction is over for this product</h4>
+                <% end %>
+            </h3>
+            <br>
+            
+            <% if user_signed_in? && current_user == @auction.user %>
+                <%= link_to 'Edit the Details', edit_auction_path, class:"btn btn-sm btn-primary " %>
+                <%= link_to 'Delete the product', auction_path(@auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
+                <%= link_to 'Back to User Dashboard', user_path(current_user), class:"btn btn-sm btn-default" %>
+                <%= link_to 'Back', :back, class:"btn btn-sm btn-default " %>
+            <% end %>
+
+            <% if @auction.user != current_user %>
+                <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-success" %>
+                <%= link_to 'Bid Now', new_bid_path(:id => @auction.id), class:"btn btn-sm btn-success" %>
+            <% end %><br>
+            <small>last updated: <%= time_ago_in_words(@auction.updated_at) %> ago </small>
+        </div>
+    </div>
+
+    <p>Seller Details </p>
+    <h2><%= link_to @auction.user.full_name, @auction.user == current_user && user_signed_in? ? user_path(@auction.user) : '#'%></h2>
+    <small> 
+        joined Online-Auction: <%= time_ago_in_words(@auction.user.created_at)%> ago,
+        last updated: <%= time_ago_in_words(@auction.user.updated_at) %> ago 
+    </small>
+    
+    <h3>email address</h3>
+    <p><%= @auction.user.email%></p>
+
+    <h3>contact number</h3>
+    <p><%= @auction.user.contact_number%></p>
+    
+    <h3>address</h3>
+    <p><%= @auction.user.address%></p>
+</div>
+
+<div class= "col-xs-12 col-md-7 ">
+     <table class="table table-striped">
+            <tr>
+                <% count = 0 %>
+                <th>#</th>
+                <th>Bidder Name</th>
+                <th>Amount</th>
+                <th>Bidding Time</th>
+                <th>Bidder Contact</th>
+            </tr>
+            <% @bids.each do |bid| %>
+                <tr>
+                    <td><strong> <%= count = count + 1 %> </strong></td>
+                    <td><%= bid.user.full_name%></td>
+                    <td><%= bid.amount ? bid.amount : '-------'%></td>
+                    <td><%= bid.created_at.strftime("%-d-%-m-%y : %H:%M %Z")%> | <%= time_ago_in_words(bid.created_at)%> ago</td>
+                    <td><%= bid.user.contact_number %></td>
+                </tr>
+            <% end %>
+    </table>
+</div>

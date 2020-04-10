@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    
+    before_action :authenticate_user!, only: [:show]
     # Get a list of all users
     # Requests: GET
     def index
