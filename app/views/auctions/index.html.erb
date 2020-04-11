@@ -6,7 +6,7 @@
 <h1 class="center" style="margin:3rem;">Products for Auction</h1>
 
 <% @auctions.each do |auction| %>
-  <% if true %> 
+  <% if auction.user != current_user %> 
   <!--auction.user != current_user-->
       <div class="col-sm-6 col-md-4 "style="padding:0rem;">
         <div class="thumbnail home-page-touchup">
@@ -48,7 +48,7 @@
                 <% if in_progress?(auction.id) %> 
                   auction ends in: <strong><%= time_ago_in_words(auction.deadline) %></strong>
                 <% else %>
-                  <h4>auction is over for this product</h4>
+                  Deadline was: <%= auction.deadline.strftime("%B %d, %Y | %l:%M %p") %>
                 <% end %>
               </h4>
   

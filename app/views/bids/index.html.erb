@@ -29,7 +29,7 @@
                 <% if in_progress?(@auction.id) %> 
                     Auction ends in: <strong><%= time_ago_in_words(@auction.deadline) %></strong>
                 <% else %>
-                    <h4>Auction is over for this product</h4>
+                    Deadline was: <%= @auction.deadline.strftime("%B %d, %Y | %l:%M %p") %>
                 <% end %>
             </h3>
             <br>
@@ -44,6 +44,7 @@
             <% if @auction.user != current_user %>
                 <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-success" %>
                 <%= link_to 'Bid Now', new_bid_path(:id => @auction.id), class:"btn btn-sm btn-success" %>
+                <%= link_to 'Back', :back, class: "btn btn-sm btn-default"%>
             <% end %><br>
             <small>last updated: <%= time_ago_in_words(@auction.updated_at) %> ago </small>
         </div>
@@ -81,7 +82,7 @@
                     <td><strong> <%= count = count + 1 %> </strong></td>
                     <td><%= bid.user.full_name%></td>
                     <td><%= bid.amount ? bid.amount : '-------'%></td>
-                    <td><%= bid.created_at.strftime("%-d-%-m-%y : %H:%M %Z")%> | <%= time_ago_in_words(bid.created_at)%> ago</td>
+                    <td><%= bid.created_at.strftime("%B %d, %Y | %l:%M %p")%></td>
                     <td><%= bid.user.contact_number %></td>
                 </tr>
             <% end %>

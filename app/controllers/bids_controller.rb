@@ -1,6 +1,6 @@
 class BidsController < ApplicationController 
     before_action :authenticate_user!
-    before_action :set_bid, only: [:show]
+    before_action :set_bid, only: []
     
     # Requests: GET
     def index #show all bids assosiated to a specific product/auction
@@ -9,9 +9,9 @@ class BidsController < ApplicationController
     end    
     
     # Requests: GET
-    def show #show all the product in which current user has done bidding
-        @auction = Auction.find(params[:auction_id])
-        # @bids = current_user.bids
+    def cart #show all the product in which current user has done bidding
+        # @auction = Auction.find(params[:auction_id])
+        @bids = Bid.where(user: current_user)
     end
 
     # Requests: GET

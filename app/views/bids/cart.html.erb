@@ -1,7 +1,6 @@
-<h2 class="center" style="margin:3rem;"> User Dashboard | Your products for auction</h2>
+<h2 class="center" style="margin-bottom:5rem;"> Your Cart | these are the product in which you have done bidding</h2>
 
-<% current_user.auctions.each do |auction|%>
-    
+<% @bids.map(&:auction).uniq.each do |auction| %>
 
     <div class="row thumbnail user-show-page" style="padding: 0px;">
         
@@ -39,15 +38,14 @@
                 <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-default" %>
                 <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
             <% end %>
+                <%= link_to 'Bid Now', new_bid_path(:id => auction.id), class: "btn btn-sm btn-primary" %> 
+                <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> 
+                <%= link_to 'All bids', bids_path(:id => auction.id), class: "btn btn-sm btn-default"%> 
 
             <small> <br>
                 [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
                 <% if auction.bidder_id %>  
-                    <% if auction.deadline <= DateTime.now %>
-                        [ claimed by: <strong><%=  @users.find(auction.bidder_id).full_name %></strong>
-                    <% else %>
-                        [ current bidder: <strong> <%=  @users.find(auction.bidder_id).full_name %></strong>
-                    <% end %>
+                        [ current bidder: <strong> <%=  User.find(auction.bidder_id).full_name %></strong>
                 <% else %> 
                         [ claimed by: <strong>Not yet claimed</strong>
                 <% end %> ] <br>     
@@ -56,5 +54,5 @@
             </small>
         </div>
     </div>
-<% end%>
-<%#  here user dashboard for claimed product will be there %>
+
+<% end %>

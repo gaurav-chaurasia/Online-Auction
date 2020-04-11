@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root 'auctions#index'
 
   resources :users, only: [:index, :show]
-  resources :bids, only: [:index, :show, :new, :create]
+  resources :bids, only: [:index, :new, :create]
+
+  get 'cart', to: 'bids#cart'
 
   # get 'show', to: 'users#show'
   # get 'index', to: 'users#index'
