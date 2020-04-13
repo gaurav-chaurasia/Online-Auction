@@ -52,8 +52,8 @@
 }
 .navbar-nav  li  .dropdown-menu {
     margin-top: 0;
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 0.5rem;
+    padding: 0rem;
 }
 .no-padding {
     padding: 0 !important;
@@ -99,6 +99,17 @@
 .user-show-page:hover {
     box-shadow: 0px 0px 20px 0.1px #e9e3e3;
 }
+.list-group {
+    margin-bottom: 2rem;
+    display: flex;
+}
+.list-group-item {
+    width: 33%;
+    border-radius: 0rem !important;
+}
+.selected {
+    border-left: 3px solid darkcyan;
+}
 .no-image-massage {
     margin: 0rem;
     position: absolute;
@@ -113,9 +124,12 @@
     color: #767b85;
     padding: 1rem;
 }
+.footer-content {
+    color: #767b85;
+}
 .footer {
     position: relative;
-    background-color: #2a303b;
+    background-color: #333;
     padding: 5rem;
     margin-top: 4rem;
 }

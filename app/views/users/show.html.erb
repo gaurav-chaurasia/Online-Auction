@@ -1,4 +1,20 @@
-<h2 class="center" style="margin:3rem;"> User Dashboard | Your products for auction</h2>
+
+<div class="list-group">
+  <a href="#" class="list-group-item selected">
+    <span class="badge"><%= current_user.auctions.count%></span>
+    <h4 class="list-group-item-heading">Your Products available for auction </h4>
+    <p class="list-group-item-text">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
+  </a>
+  <a href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">Sold products</h4>
+    <p class="list-group-item-text">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
+  </a>
+  <a href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">Claimed products</h4>
+    <p class="list-group-item-text">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
+  </a>
+</div>
+
 
 <% current_user.auctions.each do |auction|%>
     
