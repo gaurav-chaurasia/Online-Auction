@@ -66,9 +66,9 @@ Note: For some of the js gems
 
 * Clone the Repo:
 ```
-        $ git clone https://github.com/gaurav-chaurasia/IRIS_181CV155_Ruby-On-Rails 
+        $ git clone https://github.com/gaurav-chaurasia/Online-Auction 
 ```
-* Change directory into the folder named IRIS_181CV155_Ruby-On-Rails
+* Change directory into the folder named Online-Auction
 * Install all the gems
 ```
         $ bundle install
@@ -94,7 +94,7 @@ Note: For some of the js gems
   
 
 * Image upload capability
-* user can control the visibility of products( :public, :only_me )
+* seperate dashboard for sold and claimed products
 * "Active storage used for image storing feature"
 * only owner can edit, delete and update their products
 * show page for separate user and user can see their products  *USER DASHBOARD*
@@ -103,13 +103,17 @@ Note: For some of the js gems
 * description is for clarifying the product details
 
 ## List of non-implemented/planned features,
-    
 
 * Categories can be added to the product and 
 * user can search for products based on their category 
 * more image can be added for the same product 
 * user can have their profile picture and some more details 
 * live chat functionality can be added so buyer and seller can discuss about the product any time
+
+> code optimization
+* convention has not been followed well helper methods used instead of model method
+* lots logic present in view and controller instead of model
+* more model methods can be used
 
 > some links
       
@@ -118,3 +122,12 @@ Note: For some of the js gems
 `https://github.com/heartcombo/devise`   
 `https://github.com/bokmann/font-awesome-rails`   
 
+
+> SOME SCREEN SHOTS OF COMPLEATE WORKING ONLINE AUCTION WEB APP
+
+![home-page](app/assets/images/readme/home-page.png)
+![alerts-product-details-page](app/assets/images/readme/alerts-product-details-page.png)
+![sold-product-page](app/assets/images/readme/sold-product-page.png)
+![cart](app/assets/images/readme/cart.png)
+![bidding](app/assets/images/readme/bidding.png)
+![claimed-product-page](app/assets/images/readme/claimed-product-page.png)
