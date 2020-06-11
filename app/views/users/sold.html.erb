@@ -1,12 +1,13 @@
-<div class="list-group">
-  <div class="list-group-item selected">
-    <h3 class="list-group-item-heading">Cart | these are the product in which you have done bidding</h3>
+
+<div class="list-group selected">
+  <a href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">Sold products</h4>
     <p class="list-group-item-text">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
-  </div>
+  </a>
 </div>
 
-<% @bids.map(&:auction).uniq.each do |auction| %>
-    <% if !auction.buyer_id %>
+<% @auctions.each do |auction| %>
+    <% if auction.buyer_id %>
         <div class="row thumbnail user-show-page" style="padding: 0px;">
             
             <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
@@ -26,7 +27,7 @@
                 <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h3> 
                 
                 <h3>Description</h3>
-                <p><%= truncate(auction.description, :ommision => "... Read More", :length => 150) %></p>
+                <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
                 
                 <h3>
                     <% if in_progress?(auction.id) %> 
@@ -36,23 +37,15 @@
                     <% end %>
                 </h3>
                 <p></p><br><br>
+                
+                    <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-primary" %>
+                    <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
 
-                <% if in_progress?(auction.id) %>
-                    <%= link_to 'Bid Now', new_bid_path(:id => auction.id), class: "btn btn-sm btn-primary" %> 
-                <% else %>
-                    <%= link_to 'Claim Product', claim_auction_path(auction.id), method: :patch, class: "btn btn-sm btn-primary"%>
-                <% end %>
-
-                    <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> 
-                    <%= link_to 'All bids', bids_path(:id => auction.id), class: "btn btn-sm btn-default"%>
-
-                <small> <br>
-                    [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
-                    <% if auction.bidder_id %>  
-                            [ current bidder: <strong> <%=  User.find(auction.bidder_id).full_name %></strong>
-                    <% else %> 
-                            [ claimed by: <strong>Not yet claimed</strong>
-                    <% end %> ] <br>     
+                <small> 
+                    <br>
+                        [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
+                        [ claimed by: <strong><%=current_user.full_name%></strong> ] 
+                    <br>     
                     added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                     last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
                 </small>

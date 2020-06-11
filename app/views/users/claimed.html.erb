@@ -1,17 +1,11 @@
-
 <div class="list-group">
   <a href="#" class="list-group-item selected">
-    <span class="badge"><%= current_user.auctions.count%></span>
-    <h4 class="list-group-item-heading">Your Products available for auction </h4>
+    <h4 class="list-group-item-heading">Claimed products</h4>
     <p class="list-group-item-text">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
   </a>
 </div>
-
-
-<% current_user.auctions.each do |auction|%>
-    
-
-    <div class="row thumbnail user-show-page" style="padding: 0px;">
+<% @auctions.each do |auction| %>
+        <div class="row thumbnail user-show-page" style="padding: 0px;">
         
         <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
             <% if auction.image.attached? %>
@@ -41,28 +35,17 @@
             </h3>
             <p></p><br><br>
             
-            <% if user_signed_in? && current_user == auction.user %>
-                <%= link_to 'Edit Details', edit_auction_path(auction), class:"btn btn-sm btn-primary " %>
-                <%= link_to 'Delete product', auction_path(auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
-                <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-default" %>
+                <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-primary" %>
                 <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
-            <% end %>
 
-            <small> <br>
-                [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
-                <% if auction.bidder_id %>  
-                    <% if auction.deadline <= DateTime.now %>
-                        [ claimed by: <strong><%=  @users.find(auction.bidder_id).full_name %></strong>
-                    <% else %>
-                        [ current bidder: <strong> <%=  @users.find(auction.bidder_id).full_name %></strong>
-                    <% end %>
-                <% else %> 
-                        [ claimed by: <strong>Not yet claimed</strong>
-                <% end %> ] <br>     
+            <small> 
+                <br>
+                    [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
+                    [ claimed by: <strong><%=current_user.full_name%></strong> ] 
+                <br>     
                 added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                 last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
             </small>
         </div>
     </div>
-<% end%>
-<%#  here user dashboard for claimed product will be there %>
+<% end %>

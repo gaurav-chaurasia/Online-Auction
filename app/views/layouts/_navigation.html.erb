@@ -32,7 +32,10 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <%= current_user.full_name.present? ? current_user.full_name : current_user.email %><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to 'Add Products', new_auction_path, id:"droplist" %></li>
-              <li><%= link_to 'User Dashboard', user_path(current_user), id:"droplist" %></li>
+              <li><%= link_to 'your products', user_path(current_user), id:"droplist" %></li>
+              <li><%= link_to 'sold products', sold_path,id:"droplist" %></li>
+              <li><%= link_to 'Claimed products', claimed_path, id:"droplist"%></li>
+
               <li><%= link_to 'Edit User', edit_user_registration_path(current_user), id:"droplist" %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Delete Account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, id: "droplist" %></li>

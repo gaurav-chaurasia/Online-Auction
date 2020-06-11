@@ -11,4 +11,12 @@ class UsersController < ApplicationController
     def show
         @users = User.all
     end
+
+    def claimed
+        @auctions = Auction.where(buyer_id: current_user.id)
+    end
+
+    def sold
+        @auctions = Auction.where(user: current_user)
+    end
 end
