@@ -41,8 +41,7 @@
             </p>
     
               <small>    
-                  added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
-                  last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
+                  added for auction: <%= time_ago_in_words(auction.created_at)%> ago
               </small>
               <h4>
                 <% if in_progress?(auction.id) %> 

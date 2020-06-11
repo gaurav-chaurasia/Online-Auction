@@ -3,11 +3,17 @@ Rails.application.routes.draw do
   resources :auctions
 
   root 'auctions#index'
+  # patch '/auctions/:id/claim', to: 'auctions#claim'
 
   resources :users, only: [:index, :show]
   resources :bids, only: [:index, :new, :create]
 
   get 'cart', to: 'bids#cart'
+  resources :auctions do
+    member do
+      patch 'claim'
+    end
+  end
 
   # get 'show', to: 'users#show'
   # get 'index', to: 'users#index'

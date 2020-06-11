@@ -1,58 +1,63 @@
-<h2 class="center" style="margin-bottom:5rem;"> Your Cart | these are the product in which you have done bidding</h2>
+<div class="list-group">
+  <div class="list-group-item selected">
+    <span class="badge"><%= @bids.map(&:auction).uniq.count %></span>
+    <h3 class="list-group-item-heading">Cart | these are the product in which you have done bidding</h3>
+    <p class="list-group-item-text">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
+  </div>
+</div>
 
 <% @bids.map(&:auction).uniq.each do |auction| %>
-
-    <div class="row thumbnail user-show-page" style="padding: 0px;">
-        
-        <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
-            <% if auction.image.attached? %>
-                <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
-            <% else %>
-                <div class ="col-xs-12 col-md-4 "style= "width:100%; height:41rem; background-color:#f4f4f4">
-                    <div class="no-image-massage"> 
-                        No Image Available
-                    </div>
-                </div>
-            <% end %>
-        </div>
-
-        <div class= "col-sm-12 col-md-5 ">
-            <h2 class="center"><%= auction.name %></h2>
-            <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h3> 
+    <% if !auction.buyer_id %>
+        <div class="row thumbnail user-show-page" style="padding: 0px;">
             
-            <h3>Description</h3>
-            <p><%= truncate(auction.description, :ommision => ".... Read More", :length => 150) %></p>
-            
-            <h3>
-                <% if in_progress?(auction.id) %> 
-                    Deadline in: <%= time_ago_in_words(auction.deadline) %>
+            <div class ="col-sm-12 col-md-7 "style="padding: 0px;">
+                <% if auction.image.attached? %>
+                    <%= image_tag(auction.image, style: "width: 100%; height:41rem") if auction.image.attached? %>
                 <% else %>
-                    <small>Deadline was: <%= auction.deadline.strftime("%B %d, %Y | %l:%M %p") %></small>
+                    <div class ="col-xs-12 col-md-4 "style= "width:100%; height:41rem; background-color:#f4f4f4">
+                        <div class="no-image-massage"> 
+                            No Image Available
+                        </div>
+                    </div>
                 <% end %>
-            </h3>
-            <p></p><br><br>
-            
-            <% if user_signed_in? && current_user == auction.user %>
-                <%= link_to 'Edit Details', edit_auction_path(auction), class:"btn btn-sm btn-primary " %>
-                <%= link_to 'Delete product', auction_path(auction), method: :delete, data:{confirm: "Are you sure?"}, class:"btn btn-sm btn-danger" %>
-                <%= link_to 'view Details', auction_path(auction), class:"btn btn-sm btn-default" %>
-                <%= link_to 'Back to Home', auctions_path, class:"btn btn-sm btn-default" %>
-            <% end %>
-                <%= link_to 'Bid Now', new_bid_path(:id => auction.id), class: "btn btn-sm btn-primary" %> 
-                <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> 
-                <%= link_to 'All bids', bids_path(:id => auction.id), class: "btn btn-sm btn-default"%> 
+            </div>
 
-            <small> <br>
-                [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
-                <% if auction.bidder_id %>  
-                        [ current bidder: <strong> <%=  User.find(auction.bidder_id).full_name %></strong>
-                <% else %> 
-                        [ claimed by: <strong>Not yet claimed</strong>
-                <% end %> ] <br>     
-                added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
-                last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
-            </small>
+            <div class= "col-sm-12 col-md-5 ">
+                <h2 class="center"><%= auction.name %></h2>
+                <h3>STARTING BID: <%= auction.starting_bid %> &#x20B9;<br> CURRENT PRICE: <%= auction.current_price %> &#x20B9;</h3> 
+                
+                <h3>Description</h3>
+                <p><%= truncate(auction.description, :ommision => "... Read More", :length => 150) %></p>
+                
+                <h3>
+                    <% if in_progress?(auction.id) %> 
+                        Deadline in: <%= time_ago_in_words(auction.deadline) %>
+                    <% else %>
+                        <small>Deadline was: <%= auction.deadline.strftime("%B %d, %Y | %l:%M %p") %></small>
+                    <% end %>
+                </h3>
+                <p></p><br><br>
+
+                <% if in_progress?(auction.id) %>
+                    <%= link_to 'Bid Now', new_bid_path(:id => auction.id), class: "btn btn-sm btn-primary" %> 
+                <% else %>
+                    <%= link_to 'Claim Product', claim_auction_path(auction.id), method: :patch, class: "btn btn-sm btn-primary"%>
+                <% end %>
+
+                    <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> 
+                    <%= link_to 'All bids', bids_path(:id => auction.id), class: "btn btn-sm btn-default"%>
+
+                <small> <br>
+                    [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
+                    <% if auction.bidder_id %>  
+                            [ current bidder: <strong> <%=  User.find(auction.bidder_id).full_name %></strong>
+                    <% else %> 
+                            [ claimed by: <strong>Not yet claimed</strong>
+                    <% end %> ] <br>     
+                    added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
+                    last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
+                </small>
+            </div>
         </div>
-    </div>
-
+    <% end %>
 <% end %>

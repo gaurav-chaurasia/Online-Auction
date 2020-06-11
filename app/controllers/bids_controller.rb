@@ -60,9 +60,6 @@ class BidsController < ApplicationController
         end
     end
 
-    def toggle_user_buyer
-        
-    end
 
     # after edit update action PATCH /PUT and takes care of submmition 
     # Requests: Patch/Put 
