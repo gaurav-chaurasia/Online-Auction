@@ -40,7 +40,9 @@
                 <% if in_progress?(auction.id) %>
                     <%= link_to 'Bid Now', new_bid_path(:id => auction.id), class: "btn btn-sm btn-primary" %> 
                 <% else %>
-                    <%= link_to 'Claim Product', claim_auction_path(auction.id), method: :patch, class: "btn btn-sm btn-primary"%>
+                    <% if auction.bidder_id == current_user.id %>
+                        <%= link_to 'Claim Product', claim_auction_path(auction.id), method: :patch, class: "btn btn-sm btn-primary"%>
+                    <% end %>
                 <% end %>
 
                     <%= link_to 'Products Details', auction, class:"btn btn-sm btn-default" %> 

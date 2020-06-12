@@ -40,22 +40,21 @@ class AuctionsController < ApplicationController
     end
   end
 
-    def claim
-      @auction = Auction.find(params[:id])
-      @auction.buyer_id = current_user.id
-      # print "check 1 2 3 " + @auction.buyer_id 
-      # print "1 2 3 check"
-       
+  def claim
+    @auction = Auction.find(params[:id])
+    @auction.buyer_id = current_user.id
+    # print "check 1 2 3 " + @auction.buyer_id 
+    # print "1 2 3 check"
+      
+    respond_to do |format|
       if @auction.save
-          # print "check 1 2 3 " + @auction.name
-          respond_to do |format|
+        # print "check 1 2 3 " + @auction.name
           format.html { redirect_to @auction, success: 'you have successfully claimed the product!!' }
-      end
       else
-          respond_to do |format|
           format.html { redirect_to @auction, danger: 'Somthing went wrong!!' }
       end
     end
+  end
 
   # PATCH/PUT /auctions/1
   # PATCH/PUT /auctions/1.json
@@ -76,12 +75,13 @@ class AuctionsController < ApplicationController
   def destroy
     @auction.destroy
     respond_to do |format|
-      format.html { redirect_to auctions_url, danger: 'Auction was successfully destroyed.' }
+      format.html { redirect_to auctions_url, danger: 'Product is successfully removeld from auction.' }
       format.json { head :no_content }
     end
   end
 
-  # private
+  private
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_auction
       @auction = Auction.find(params[:id])
@@ -91,5 +91,5 @@ class AuctionsController < ApplicationController
     def auction_params
       params.require(:auction).permit(:name, :description, :starting_bid, :deadline, :bidder, :current_price, :image)
     end
-end
+  
 end

@@ -2,8 +2,6 @@
 
 > Note: All steps were performed using Ubuntu 18.04.4 LTS.
 
-## step:1   
-
 
 ### Installation needed for running application
 
@@ -125,9 +123,15 @@ Note: For some of the js gems
 
 > SOME SCREEN SHOTS OF COMPLEATE WORKING ONLINE AUCTION WEB APP
 
+> home-page
 ![home-page](app/assets/images/readme/home-page.png)
+>alerts-product-details-page
 ![alerts-product-details-page](app/assets/images/readme/alerts-product-details-page.png)
+> sold-product-page
 ![sold-product-page](app/assets/images/readme/sold-product-page.png)
+> cart
 ![cart](app/assets/images/readme/cart.png)
+> bidding
 ![bidding](app/assets/images/readme/bidding.png)
+> claimed-product-page
 ![claimed-product-page](app/assets/images/readme/claimed-product-page.png)

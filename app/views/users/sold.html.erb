@@ -44,7 +44,7 @@
                 <small> 
                     <br>
                         [ owner:<strong> <%= auction.user.full_name if auction.user %> </strong> ]  
-                        [ claimed by: <strong><%=current_user.full_name%></strong> ] 
+                        [ claimed by: <strong><%=get_user(auction.buyer_id).full_name%></strong> ] 
                     <br>     
                     added for auction: <%= time_ago_in_words(auction.created_at)%> ago,
                     last updated: <%= time_ago_in_words(auction.updated_at) %> ago 
