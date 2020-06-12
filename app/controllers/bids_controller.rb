@@ -44,16 +44,16 @@ class BidsController < ApplicationController
             # print params[:bid][:amount]
             
             respond_to do |format|
-            if @bid.save
-                format.html { redirect_to bids_path(:id => @auction.id), success: 'Bid was successfully created.' }
-                # redirect_to user(current_user)
-                # :success 'Bid was successfully created.'
-            else
-                format.html { redirect_to auction_path(@auction), danger: 'Something went wrong Bid not created!' }
-                # render 'new'
-                # :danger 'Something went wrong Bid not created!'  
+                if @bid.save
+                    format.html { redirect_to bids_path(:id => @auction.id), success: 'Bid was successfully created.' }
+                    # redirect_to user(current_user)
+                    # :success 'Bid was successfully created.'
+                else
+                    format.html { redirect_to auction_path(@auction), danger: 'Something went wrong Bid not created!' }
+                    # render 'new'
+                    # :danger 'Something went wrong Bid not created!'  
+                end
             end
-        end
         else
             respond_to do |format|
             format.html { redirect_to auction_path(@auction), info: 'You can not bid less than current price or no your own products' }
