@@ -92,6 +92,12 @@ Note: For some of the js gems
   
 
 * Image upload capability
+* user can search the product with 
+    
+    * keywords
+    * minimum price 
+    * maximum price 
+
 * seperate dashboard for sold and claimed products
 * "Active storage used for image storing feature"
 * only owner can edit, delete and update their products
@@ -146,3 +152,12 @@ Note: For some of the js gems
 > claimed-product-page
 
 ![claimed-product-page](app/assets/images/readme/claimed-product-page.png)
+
+> search-page-if-result-found
+
+![claimed-product-page](app/assets/images/readme/search-if-result-found.png)
+
+> search-page-if-result-not-found
+
+![claimed-product-page](app/assets/images/readme/search-if-result-not-found.png)
+

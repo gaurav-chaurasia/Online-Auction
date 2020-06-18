@@ -6,4 +6,13 @@ class Auction < ApplicationRecord
     def claimed_product
         return self.buyer_id != null
     end
+
+    def create_auction(current_user)
+        self.user = current_user
+        self.current_price = self.starting_bid
+    end
+
+    def set_buyer(id)
+        self.buyer_id = id
+    end
 end

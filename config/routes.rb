@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "user/registrations" }
   
+  resources :searches
   resources :auctions
   resources :auctions do
     member do

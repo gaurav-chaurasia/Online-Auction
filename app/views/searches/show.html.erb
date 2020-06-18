@@ -1,18 +1,20 @@
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %>
-    <a href="#" class="close" data-dismiss="alert">&#215;</a>
-  </div>
-<% end %>
-
-<div class="list-group selected">
-  <a href="#" class="list-group-item">
-    <h2 class="list-group-item-heading">Products for Auction</h2>
+<div class="list-group">
+  <a href="#" class="list-group-item selected">
+    <h4 class="list-group-item-heading">Search Result</h4>
   </a>
 </div>
 
-<% @auctions.each do |auction| %>
+<% if @search.search_auctions.empty? %>
+    <div class ="col-xs-12 col-md-12"style= "width:100%; height:31rem; background-color:#f4f4f4">
+        <div class="no-image-massage"> 
+            No Search Result Found...!!!
+        </div>
+    </div>
+    <%= link_to 'Back', :back, class: "btn btn-default btn-md"%>
+<% end %>
+
+<% @search.search_auctions.each do |auction| %>
   <% if true %> 
-  <!--auction.user != current_user-->
       <div class="col-sm-6 col-md-4 "style="padding:0rem;">
         <div class="thumbnail home-page-touchup">
           

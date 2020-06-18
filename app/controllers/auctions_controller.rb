@@ -5,7 +5,8 @@ class AuctionsController < ApplicationController
   # GET /auctions
   # GET /auctions.json
   def index
-    @auctions = Auction.all
+    @auctions = Auction.all.order(created_at: :desc)
+    # newer products first
   end
 
   # GET /auctions/1
@@ -26,8 +27,10 @@ class AuctionsController < ApplicationController
   # POST /auctions.json
   def create
     @auction = Auction.new(auction_params)
-    @auction.user = current_user
-    @auction.current_price = @auction.starting_bid
+    @auction.create_auction(current_user)
+    
+    # @auction.user = current_user
+    # @auction.current_price = @auction.starting_bid
     
     respond_to do |format|
       if @auction.save
@@ -42,7 +45,9 @@ class AuctionsController < ApplicationController
 
   def claim
     @auction = Auction.find(params[:id])
-    @auction.buyer_id = current_user.id
+    @auction.set_buyer(current_user.id)
+    
+    # @auction.buyer_id = current_user.id
     # print "check 1 2 3 " + @auction.buyer_id 
     # print "1 2 3 check"
       
