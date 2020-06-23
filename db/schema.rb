@@ -38,11 +38,14 @@ ActiveRecord::Schema.define(version: 2020_06_18_135307) do
     t.text "description"
     t.float "starting_bid"
     t.datetime "deadline"
-    t.integer "bidder"
     t.float "current_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "bidder_id"
+    t.bigint "buyer_id"
+    t.index ["bidder_id"], name: "index_auctions_on_bidder_id"
+    t.index ["buyer_id"], name: "index_auctions_on_buyer_id"
     t.index ["user_id"], name: "index_auctions_on_user_id"
   end
 
