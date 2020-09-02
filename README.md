@@ -3,6 +3,10 @@
 > Note: All steps were performed using Ubuntu 18.04.4 LTS.
 
 
+<a href="https://github.com/gaurav-chaurasia/Online-Auction/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=gaurav-chaurasia/Online-Auction" />
+</a>
+
 ### Installation needed for running application
 
 
@@ -160,4 +164,5 @@ Note: For some of the js gems
 > search-page-if-result-not-found
 
 ![claimed-product-page](app/assets/images/readme/search-if-result-not-found.png)
+
 
